@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.*" />
+	
+<!-- <bean id="securityContextRepositoryNoJSession" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository">
+    <property name="disableUrlRewriting" value="true"/>
+</bean> -->
+
+	
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	
+
+	<mvc:annotation-driven />
+	
+		<!-- <mvc:interceptors>
+		<bean class="com.cgg.filter.ApplicationInterceptor" />
+	</mvc:interceptors> -->
+
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<bean id="dataSource1"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://10.2.28.12:5434/ttdhrmaps17052018" />
+		<property name="username" value="ttdehrps" />
+		<property name="password" value="ttdehrps" />
+	</bean>
+	
+	
+	<bean id="jdbcTemplate1" class="org.springframework.jdbc.core.JdbcTemplate">  
+<property name="dataSource" ref="dataSource1"></property>  
+</bean>  
+	
+	
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://10.2.28.12:5434/ttdhrmaps" />
+		<property name="username" value="ttdhrmaps" />
+		<property name="password" value="ttdhrmaps" />
+	</bean>
+	
+	<!-- Live DataBase -->
+	<!-- <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://117.198.100.213:5432/ttdehrps" />
+		<property name="username" value="ttdehrps" />
+		<property name="password" value="ttdehrps" />
+	</bean> -->
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+<property name="dataSource" ref="dataSource"></property>  
+</bean> 
+
+</beans>
